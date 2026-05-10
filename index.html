@@ -66,7 +66,51 @@
 </head>
 <body class="font-poppins antialiased">
 
-  <p class="text-off-white text-center p-8 font-montserrat">USA Sport Shell OK</p>
+  <!-- NAV -->
+  <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-sand/10">
+    <div class="max-w-7xl mx-auto px-6 lg:px-8 flex items-center justify-between h-16 lg:h-20">
+      <a href="#" class="flex-shrink-0">
+        <img src="Usalogo2.png" alt="USA Sport Rijssen" class="h-10 lg:h-12 w-auto logo-dark" />
+      </a>
+      <nav class="hidden lg:flex items-center gap-8">
+        <a href="#lidmaatschappen" class="font-poppins font-medium text-off-white/80 hover:text-off-white text-sm tracking-wide transition-colors duration-200 relative group">Lidmaatschappen<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-usa-red group-hover:w-full transition-all duration-200"></span></a>
+        <a href="#groepslessen" class="font-poppins font-medium text-off-white/80 hover:text-off-white text-sm tracking-wide transition-colors duration-200 relative group">Groepslessen<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-usa-red group-hover:w-full transition-all duration-200"></span></a>
+        <a href="#faciliteiten" class="font-poppins font-medium text-off-white/80 hover:text-off-white text-sm tracking-wide transition-colors duration-200 relative group">Faciliteiten<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-usa-red group-hover:w-full transition-all duration-200"></span></a>
+        <a href="#contact" class="font-poppins font-medium text-off-white/80 hover:text-off-white text-sm tracking-wide transition-colors duration-200 relative group">Contact<span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-usa-red group-hover:w-full transition-all duration-200"></span></a>
+      </nav>
+      <div class="flex items-center gap-4">
+        <button onclick="document.getElementById('dagpas-modal').classList.remove('hidden')"
+          class="hidden lg:inline-flex items-center gap-2 bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold text-sm px-5 py-2.5 rounded-sm shadow-red transition-colors duration-200 cursor-pointer">
+          Word lid
+        </button>
+        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Menu openen">
+          <span class="w-6 h-0.5 bg-off-white"></span>
+          <span class="w-6 h-0.5 bg-off-white"></span>
+          <span class="w-6 h-0.5 bg-off-white"></span>
+        </button>
+      </div>
+    </div>
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 top-16 bg-anthracite z-40 flex flex-col items-center justify-center gap-8">
+      <a href="#lidmaatschappen" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Lidmaatschappen</a>
+      <a href="#groepslessen" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Groepslessen</a>
+      <a href="#faciliteiten" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Faciliteiten</a>
+      <a href="#contact" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
+      <button onclick="document.getElementById('mobile-menu').classList.add('hidden'); document.getElementById('dagpas-modal').classList.remove('hidden')"
+        class="bg-usa-red text-white font-poppins font-semibold text-lg px-8 py-3 rounded-sm shadow-red cursor-pointer">
+        Gratis dagpas
+      </button>
+    </div>
+  </header>
+  <script>
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+  </script>
+
+  <main>
+    <!-- sections go here -->
+  </main>
 
   <script>
     const observer = new IntersectionObserver((entries) => {
