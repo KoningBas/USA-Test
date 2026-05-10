@@ -1,0 +1,13 @@
+{
+  "name": "usa-sport-website",
+  "version": "1.0.0",
+  "description": "USA Sport fitness gym website",
+  "type": "module",
+  "scripts": {
+    "serve": "node serve.mjs",
+    "screenshot": "node screenshot.mjs"
+  },
+  "dependencies": {
+    "puppeteer": "^23.0.0"
+  }
+}

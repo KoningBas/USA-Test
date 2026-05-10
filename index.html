@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="nl" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <!-- SEO -->
+  <title>USA Sport — Dé Fitness Arena in Rijssen | Exclusief Fitnesscentrum</title>
+  <meta name="description" content="USA Sport in Rijssen: fitness, 60+ groepslessen/week, personal training, fysiotherapie en zonnestudio. Probeer gratis een dagpas. Bel 0548-517073." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://usa-rijssen.nl" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://usa-rijssen.nl" />
+  <meta property="og:title" content="USA Sport — Dé Fitness Arena in Rijssen" />
+  <meta property="og:description" content="Fitness, groepslessen, personal training en fysiotherapie in Rijssen. Probeer gratis een dagpas." />
+  <meta property="og:image" content="https://placehold.co/1200x630/1C1C1E/CC1122?text=USA+Sport+Rijssen" />
+  <meta property="og:locale" content="nl_NL" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="USA Sport — Dé Fitness Arena in Rijssen" />
+  <meta name="twitter:description" content="Fitness, groepslessen, personal training en fysiotherapie in Rijssen." />
+  <meta name="twitter:image" content="https://placehold.co/1200x630/1C1C1E/CC1122?text=USA+Sport+Rijssen" />
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;800&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet" />
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            anthracite: '#1C1C1E',
+            surface: '#252528',
+            'surface-raised': '#2E2E32',
+            'off-white': '#F5F4F0',
+            muted: '#9A9A9E',
+            'usa-red': '#CC1122',
+            'usa-red-dark': '#991018',
+            sand: '#C4B49A',
+          },
+          fontFamily: {
+            montserrat: ['Montserrat', 'sans-serif'],
+            poppins: ['Poppins', 'sans-serif'],
+          },
+        }
+      }
+    }
+  </script>
+  <style>
+    body { background-color: #1C1C1E; color: #F5F4F0; }
+    .logo-dark { mix-blend-mode: multiply; }
+    .shadow-red { box-shadow: 0 4px 20px rgba(204,17,34,0.35); }
+    .shadow-card { box-shadow: 0 2px 8px rgba(0,0,0,0.4), 0 8px 32px rgba(0,0,0,0.25); }
+    .reveal { opacity: 0; transform: translateY(24px); transition: opacity 400ms ease-out, transform 400ms ease-out; }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    @keyframes bounce-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
+    .animate-bounce-y { animation: bounce-y 2s infinite; }
+  </style>
+</head>
+<body class="font-poppins antialiased">
+
+  <p class="text-off-white text-center p-8 font-montserrat">USA Sport Shell OK</p>
+
+  <script>
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+    }, { threshold: 0.1 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
