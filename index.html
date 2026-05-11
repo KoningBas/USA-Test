@@ -177,30 +177,51 @@
           Word lid
         </button>
         <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
-          <span class="w-6 h-0.5 bg-off-white"></span>
-          <span class="w-6 h-0.5 bg-off-white"></span>
-          <span class="w-6 h-0.5 bg-off-white"></span>
+          <span class="w-6 h-0.5 bg-off-white transition-transform duration-200" id="bar1"></span>
+          <span class="w-6 h-0.5 bg-off-white transition-opacity duration-200" id="bar2"></span>
+          <span class="w-6 h-0.5 bg-off-white transition-transform duration-200" id="bar3"></span>
         </button>
       </div>
     </div>
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 top-16 bg-anthracite z-40 flex flex-col items-center justify-center gap-8">
-      <a href="#lidmaatschappen" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Lidmaatschappen</a>
-      <a href="#groepslessen" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Groepslessen</a>
-      <a href="#faciliteiten" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Faciliteiten</a>
-      <a href="#contact" class="font-montserrat font-bold text-2xl text-off-white" onclick="document.getElementById('mobile-menu').classList.add('hidden')">Contact</a>
-      <button onclick="document.getElementById('mobile-menu').classList.add('hidden'); openModal()"
-        class="bg-usa-red text-white font-poppins font-semibold text-lg px-8 py-3 rounded-sm shadow-red cursor-pointer">
-        Gratis dagpas
-      </button>
-    </div>
   </header>
+  <!-- Mobile menu — must live OUTSIDE <header> so backdrop-filter doesn't create a new containing block -->
+  <div id="mobile-menu" class="hidden lg:hidden fixed inset-0 top-16 bg-anthracite z-40 flex flex-col items-center justify-start overflow-y-auto py-12 gap-8">
+    <a href="#lidmaatschappen" class="font-montserrat font-bold text-2xl text-off-white hover:text-usa-red transition-colors duration-200" onclick="closeMobileMenu()">Lidmaatschappen</a>
+    <a href="#groepslessen" class="font-montserrat font-bold text-2xl text-off-white hover:text-usa-red transition-colors duration-200" onclick="closeMobileMenu()">Groepslessen</a>
+    <a href="#faciliteiten" class="font-montserrat font-bold text-2xl text-off-white hover:text-usa-red transition-colors duration-200" onclick="closeMobileMenu()">Faciliteiten</a>
+    <a href="#contact" class="font-montserrat font-bold text-2xl text-off-white hover:text-usa-red transition-colors duration-200" onclick="closeMobileMenu()">Contact</a>
+    <div class="w-px h-8 bg-sand/20"></div>
+    <button onclick="closeMobileMenu(); openModal()"
+      class="bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold text-lg px-8 py-3 rounded-sm shadow-red cursor-pointer transition-colors duration-200">
+      Gratis dagpas
+    </button>
+  </div>
   <script>
-    document.getElementById('menu-btn').addEventListener('click', () => {
-      const menuHidden = document.getElementById('mobile-menu').classList.toggle('hidden');
+    function closeMobileMenu() {
+      const menu = document.getElementById('mobile-menu');
       const btn = document.getElementById('menu-btn');
-      btn.setAttribute('aria-expanded', String(!menuHidden));
-      btn.setAttribute('aria-label', menuHidden ? 'Menu openen' : 'Menu sluiten');
+      menu.classList.add('hidden');
+      btn.setAttribute('aria-expanded', 'false');
+      btn.setAttribute('aria-label', 'Menu openen');
+      document.getElementById('bar1').style.transform = '';
+      document.getElementById('bar2').style.opacity = '';
+      document.getElementById('bar3').style.transform = '';
+    }
+
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      const menu = document.getElementById('mobile-menu');
+      const btn = document.getElementById('menu-btn');
+      const isOpen = !menu.classList.contains('hidden');
+      if (isOpen) {
+        closeMobileMenu();
+      } else {
+        menu.classList.remove('hidden');
+        btn.setAttribute('aria-expanded', 'true');
+        btn.setAttribute('aria-label', 'Menu sluiten');
+        document.getElementById('bar1').style.transform = 'translateY(8px) rotate(45deg)';
+        document.getElementById('bar2').style.opacity = '0';
+        document.getElementById('bar3').style.transform = 'translateY(-8px) rotate(-45deg)';
+      }
     });
   </script>
 
