@@ -4,10 +4,12 @@
   "description": "USA Sport fitness gym website",
   "type": "module",
   "scripts": {
-    "serve": "node serve.mjs",
-    "screenshot": "node screenshot.mjs"
+    "serve": "node scripts/serve.mjs",
+    "screenshot": "node scripts/screenshot.mjs",
+    "test": "node --test tests/validate.test.js"
   },
   "dependencies": {
-    "puppeteer": "^23.0.0"
+    "puppeteer": "^23.0.0",
+    "resend": "^6.12.3"
   }
 }

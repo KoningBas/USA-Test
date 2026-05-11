@@ -2,3 +2,6 @@ node_modules/
 temporary screenshots/
 .claude/
 .superpowers/
+.env.local
+.env*.local
+.vercel
