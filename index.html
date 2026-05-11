@@ -219,38 +219,81 @@
       <span class="font-poppins text-xs font-semibold tracking-widest uppercase text-usa-red mb-3 block">01 — Faciliteiten</span>
       <h2 class="font-montserrat font-bold text-off-white" style="font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;">Alles wat je nodig hebt,<br />onder één dak.</h2>
     </div>
-    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="bg-surface rounded-sm p-8 shadow-card reveal" style="transition:transform 200ms ease-out,background-color 200ms ease-out;" onmouseover="this.style.transform='translateY(-4px)';this.style.backgroundColor='#2E2E32'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundColor='#252528'">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6.5 6.5h11"/><path d="M6.5 17.5h11"/><path d="M3 10h2.5v4H3z"/><path d="M18.5 10H21v4h-2.5z"/><path d="M5.5 10v4"/><path d="M18.5 10v4"/></svg></div>
-        <h3 class="font-montserrat font-bold text-off-white text-lg mb-2">Fitness & Kracht</h3>
-        <p class="font-poppins text-muted text-sm leading-relaxed">Uitgebreide krachtzaal met moderne apparatuur voor elk niveau.</p>
+
+    <div class="fac-bento">
+
+      <!-- GROTE KAART: Fitness & Kracht -->
+      <div class="fac-card-big fac-wipe">
+        <div class="fac-photo" style="background:linear-gradient(135deg,#200a0d 0%,#0d0f18 100%);">
+          <div class="fac-ph"><span class="font-montserrat font-extrabold" style="font-size:8rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">1</span></div>
+        </div>
+        <div class="fac-overlay"></div>
+        <div class="fac-content-big">
+          <div>
+            <span class="font-poppins text-usa-red" style="font-size:9px;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;display:block;margin-bottom:6px;">Featured</span>
+            <h3 class="font-montserrat font-extrabold text-off-white" style="font-size:clamp(1.4rem,2.5vw,2rem);letter-spacing:-0.02em;margin-bottom:8px;">Fitness &amp; Kracht</h3>
+            <p class="font-poppins" style="font-size:14px;line-height:1.65;color:rgba(245,244,240,0.65);max-width:420px;">Uitgebreide krachtzaal met moderne apparatuur voor elk niveau — van beginner tot gevorderde atleet.</p>
+          </div>
+          <a href="#" class="fac-cta-big font-poppins">
+            Meer info
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
-      <div class="bg-surface rounded-sm p-8 shadow-card reveal" style="transition:transform 200ms ease-out,background-color 200ms ease-out;" onmouseover="this.style.transform='translateY(-4px)';this.style.backgroundColor='#2E2E32'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundColor='#252528'">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg></div>
-        <h3 class="font-montserrat font-bold text-off-white text-lg mb-2">Cardio</h3>
-        <p class="font-poppins text-muted text-sm leading-relaxed">Loopbanden, crosstrainers en fietsen voor optimale cardiotraining.</p>
-      </div>
-      <div class="bg-surface rounded-sm p-8 shadow-card reveal" style="transition:transform 200ms ease-out,background-color 200ms ease-out;" onmouseover="this.style.transform='translateY(-4px)';this.style.backgroundColor='#2E2E32'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundColor='#252528'">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
-        <h3 class="font-montserrat font-bold text-off-white text-lg mb-2">Groepslessen</h3>
-        <p class="font-poppins text-muted text-sm leading-relaxed">Meer dan 60 lessen per week — van yoga tot HIIT en spinning.</p>
-      </div>
-      <div class="bg-surface rounded-sm p-8 shadow-card reveal" style="transition:transform 200ms ease-out,background-color 200ms ease-out;" onmouseover="this.style.transform='translateY(-4px)';this.style.backgroundColor='#2E2E32'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundColor='#252528'">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="5"/><path d="M20 21a8 8 0 1 0-16 0"/></svg></div>
-        <h3 class="font-montserrat font-bold text-off-white text-lg mb-2">Personal Training</h3>
-        <p class="font-poppins text-muted text-sm leading-relaxed">Persoonlijke begeleiding van gecertificeerde trainers op jouw doelen.</p>
-      </div>
-      <div class="bg-surface rounded-sm p-8 shadow-card reveal" style="transition:transform 200ms ease-out,background-color 200ms ease-out;" onmouseover="this.style.transform='translateY(-4px)';this.style.backgroundColor='#2E2E32'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundColor='#252528'">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg></div>
-        <h3 class="font-montserrat font-bold text-off-white text-lg mb-2">Fysiotherapie</h3>
-        <p class="font-poppins text-muted text-sm leading-relaxed">Professionele fysiotherapeuten direct beschikbaar in ons centrum.</p>
-      </div>
-      <div class="bg-surface rounded-sm p-8 shadow-card reveal" style="transition:transform 200ms ease-out,background-color 200ms ease-out;" onmouseover="this.style.transform='translateY(-4px)';this.style.backgroundColor='#2E2E32'" onmouseout="this.style.transform='translateY(0)';this.style.backgroundColor='#252528'">
-        <div class="mb-4"><svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg></div>
-        <h3 class="font-montserrat font-bold text-off-white text-lg mb-2">Zonnestudio</h3>
-        <p class="font-poppins text-muted text-sm leading-relaxed">Moderne zonnebanken voor een gezonde kleur het hele jaar door.</p>
-      </div>
-    </div>
+
+      <!-- 4 KLEINE KAARTEN -->
+      <div class="fac-cards-row">
+
+        <div class="fac-card-small fac-fade-up" style="--fac-delay:0ms;">
+          <div class="fac-photo" style="background:linear-gradient(135deg,#0a1a0f 0%,#0d1612 100%);">
+            <div class="fac-ph"><span class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">2</span></div>
+          </div>
+          <div class="fac-overlay"></div>
+          <div class="fac-content-small">
+            <h3 class="font-montserrat font-bold text-off-white" style="font-size:14px;letter-spacing:0.01em;margin-bottom:4px;">Groepslessen</h3>
+            <p class="font-poppins" style="font-size:11px;line-height:1.55;color:rgba(245,244,240,0.55);margin-bottom:10px;">Meer dan 60 lessen per week — van yoga tot HIIT en spinning.</p>
+            <a href="#" class="fac-cta-small font-poppins">Meer info <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </div>
+        </div>
+
+        <div class="fac-card-small fac-fade-up" style="--fac-delay:80ms;">
+          <div class="fac-photo" style="background:linear-gradient(135deg,#1a0d0d 0%,#160c0e 100%);">
+            <div class="fac-ph"><span class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">3</span></div>
+          </div>
+          <div class="fac-overlay"></div>
+          <div class="fac-content-small">
+            <h3 class="font-montserrat font-bold text-off-white" style="font-size:14px;letter-spacing:0.01em;margin-bottom:4px;">Personal Training</h3>
+            <p class="font-poppins" style="font-size:11px;line-height:1.55;color:rgba(245,244,240,0.55);margin-bottom:10px;">Persoonlijke begeleiding van gecertificeerde trainers op jouw doelen.</p>
+            <a href="#" class="fac-cta-small font-poppins">Meer info <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </div>
+        </div>
+
+        <div class="fac-card-small fac-fade-up" style="--fac-delay:160ms;">
+          <div class="fac-photo" style="background:linear-gradient(135deg,#0d0d1a 0%,#0c0c18 100%);">
+            <div class="fac-ph"><span class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">4</span></div>
+          </div>
+          <div class="fac-overlay"></div>
+          <div class="fac-content-small">
+            <h3 class="font-montserrat font-bold text-off-white" style="font-size:14px;letter-spacing:0.01em;margin-bottom:4px;">Fysiotherapie</h3>
+            <p class="font-poppins" style="font-size:11px;line-height:1.55;color:rgba(245,244,240,0.55);margin-bottom:10px;">Professionele fysiotherapeuten direct beschikbaar in ons centrum.</p>
+            <a href="#" class="fac-cta-small font-poppins">Meer info <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </div>
+        </div>
+
+        <div class="fac-card-small fac-fade-up" style="--fac-delay:240ms;">
+          <div class="fac-photo" style="background:linear-gradient(135deg,#1a1508 0%,#161108 100%);">
+            <div class="fac-ph"><span class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">5</span></div>
+          </div>
+          <div class="fac-overlay"></div>
+          <div class="fac-content-small">
+            <h3 class="font-montserrat font-bold text-off-white" style="font-size:14px;letter-spacing:0.01em;margin-bottom:4px;">Zonnestudio</h3>
+            <p class="font-poppins" style="font-size:11px;line-height:1.55;color:rgba(245,244,240,0.55);margin-bottom:10px;">Moderne zonnebanken voor een gezonde kleur het hele jaar door.</p>
+            <a href="#" class="fac-cta-small font-poppins">Meer info <svg xmlns="http://www.w3.org/2000/svg" width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg></a>
+          </div>
+        </div>
+
+      </div><!-- /fac-cards-row -->
+    </div><!-- /fac-bento -->
   </div>
 </section>
 
