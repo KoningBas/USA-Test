@@ -778,6 +778,22 @@
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
     }, { threshold: 0.1 });
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    // Faciliteiten — clip wipe op grote kaart
+    const facWipeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('fac-visible'); facWipeObs.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+    document.querySelectorAll('.fac-wipe').forEach(el => facWipeObs.observe(el));
+
+    // Faciliteiten — staggered fade-up op kleine kaarten
+    const facFadeObs = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add('fac-visible'); facFadeObs.unobserve(e.target); }
+      });
+    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+    document.querySelectorAll('.fac-fade-up').forEach(el => facFadeObs.observe(el));
   </script>
 </body>
 </html>
