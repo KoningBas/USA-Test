@@ -51,6 +51,12 @@ export default async function handler(req, res) {
     return res.status(400).json({ error: 'Verificatie mislukt' });
   }
 
+  // Type guard — reject non-string fields before any .trim() calls
+  const fields = { naam, adres, email, telefoon };
+  for (const [key, val] of Object.entries(fields)) {
+    if (typeof val !== 'string') return res.status(400).json({ error: 'Bad request' });
+  }
+
   // Field validation
   const errors = validateFields({ naam, adres, email, telefoon });
   if (errors.length > 0) {

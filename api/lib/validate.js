@@ -11,7 +11,7 @@ export function validateFields({ naam, adres, email, telefoon }) {
   if (!adres || adres.trim().length < 5 || adres.trim().length > 200) {
     errors.push('adres');
   }
-  if (!email || !/^[^\s@]+@[^\s@]{2,}\.[^\s@]{2,}$/.test(email.trim())) {
+  if (!email || !/^[^\s@]+@[^\s@]{1,}\.[^\s@]{2,}$/.test(email.trim())) {
     errors.push('email');
   }
   if (!telefoon || telefoon.trim().length < 6 || telefoon.trim().length > 20) {

@@ -73,6 +73,16 @@ test('whitespace-only naam returns naam error', () => {
   assert.ok(errors.includes('naam'));
 });
 
+test('email with 1-char second-level domain is valid (user@x.nl)', () => {
+  const errors = validateFields({ ...VALID, email: 'user@x.nl' });
+  assert.equal(errors.length, 0);
+});
+
+test('email with empty host (user@.nl) returns email error', () => {
+  const errors = validateFields({ ...VALID, email: 'user@.nl' });
+  assert.ok(errors.includes('email'));
+});
+
 test('adres of 201 characters returns adres error', () => {
   const errors = validateFields({ ...VALID, adres: 'A'.repeat(201) });
   assert.ok(errors.includes('adres'));
