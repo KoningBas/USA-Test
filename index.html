@@ -142,10 +142,6 @@
     /* Cookie banner body offset */
     body.cookie-visible{padding-bottom:80px;}
 
-    /* Turnstile loading spinner */
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .spin { animation: spin 0.8s linear infinite; display: inline-block; }
-
     /* prefers-reduced-motion */
     @media(prefers-reduced-motion:reduce){
       .reveal{opacity:1!important;transform:none!important;transition:none!important;}
@@ -804,7 +800,7 @@
     <span class="font-poppins text-xs font-semibold tracking-widest uppercase text-usa-red mb-2 block">Gratis dagpas</span>
     <h2 class="font-montserrat font-bold text-off-white text-2xl mb-2" style="letter-spacing:-0.02em;">Probeer USA Sport gratis</h2>
     <p class="font-poppins text-muted text-sm mb-6" style="line-height:1.75;">Vul je gegevens in — wij nemen contact met je op om je dagpas te bevestigen.</p>
-    <div id="dagpas-success" class="hidden text-center py-8">
+    <div id="dagpas-success" role="status" tabindex="-1" class="hidden text-center py-8">
       <div class="w-12 h-12 rounded-full bg-usa-red/10 border border-usa-red/30 flex items-center justify-center mx-auto mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
       </div>
@@ -813,8 +809,9 @@
     </div>
     <form id="dagpas-form" onsubmit="handleDagpasSubmit(event)" class="flex flex-col gap-4">
       <!-- Honeypot — must stay hidden, bots fill it, humans don't -->
-      <input id="dp-website" name="website" type="text" tabindex="-1" autocomplete="off"
-        aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;" />
+      <div aria-hidden="true" style="position:absolute;left:-9999px;opacity:0;pointer-events:none;">
+        <input id="dp-website" name="website" type="text" tabindex="-1" autocomplete="off" />
+      </div>
       <div>
         <label for="dp-naam" class="font-poppins text-off-white/80 text-xs font-semibold uppercase tracking-wide block mb-1.5">Naam *</label>
         <input id="dp-naam" name="naam" type="text" required placeholder="Voor- en achternaam"
@@ -838,7 +835,7 @@
       <!-- Cloudflare Turnstile — data-sitekey: test key, replace in Task 5 -->
       <div class="cf-turnstile" data-sitekey="1x00000000000000000000AA" data-theme="dark"></div>
       <!-- Error message — shown on submit failure -->
-      <div id="dagpas-error" class="hidden rounded-sm px-4 py-3" style="background:rgba(204,17,34,0.12);border:1px solid rgba(204,17,34,0.35);">
+      <div id="dagpas-error" role="alert" class="hidden rounded-sm px-4 py-3" style="background:rgba(204,17,34,0.12);border:1px solid rgba(204,17,34,0.35);">
         <p id="dagpas-error-text" class="font-poppins text-sm" style="color:#F5F4F0;line-height:1.5;"></p>
       </div>
       <button id="dagpas-submit-btn" type="submit"
@@ -876,6 +873,17 @@
   <script>
     function openModal() {
       const m = document.getElementById('dagpas-modal');
+      // C1: reset form state so a re-open after Esc mid-submit is never broken
+      const btn = document.getElementById('dagpas-submit-btn');
+      btn.disabled = false;
+      btn.style.opacity = '';
+      btn.style.cursor = '';
+      btn.textContent = 'Verstuur aanvraag';
+      document.getElementById('dagpas-error').classList.add('hidden');
+      document.getElementById('dagpas-form').classList.remove('hidden');
+      document.getElementById('dagpas-success').classList.add('hidden');
+      window.turnstile?.reset();
+
       m.classList.remove('hidden', 'is-closing');
       requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('is-open')));
     }
@@ -904,8 +912,13 @@
       // Hide previous error
       errorDiv.classList.add('hidden');
 
-      // Require Turnstile token
-      const token = window.turnstile?.getResponse() ?? '';
+      // I4: distinguish Turnstile not loaded vs. not completed
+      if (!window.turnstile) {
+        errorText.textContent = 'De verificatie laadt nog. Probeer het opnieuw.';
+        errorDiv.classList.remove('hidden');
+        return;
+      }
+      const token = window.turnstile.getResponse() ?? '';
       if (!token) {
         errorText.textContent = 'Bevestig dat je geen robot bent.';
         errorDiv.classList.remove('hidden');
@@ -919,6 +932,10 @@
       btn.style.cursor = 'not-allowed';
       btn.textContent = 'Versturen...';
 
+      // I3: AbortController with 15-second timeout
+      const controller = new AbortController();
+      const timeoutId = setTimeout(() => controller.abort(), 15000);
+
       try {
         const res = await fetch('/api/dagpas', {
           method: 'POST',
@@ -931,19 +948,29 @@
             website: document.getElementById('dp-website').value,
             turnstileToken: token,
           }),
+          signal: controller.signal,
         });
+        clearTimeout(timeoutId);
 
         if (res.ok) {
           document.getElementById('dagpas-form').classList.add('hidden');
-          document.getElementById('dagpas-success').classList.remove('hidden');
+          // I11: move focus to success div so screen readers announce it
+          const successDiv = document.getElementById('dagpas-success');
+          successDiv.classList.remove('hidden');
+          successDiv.focus();
           return; // don't restore button — form is hidden
         }
 
         errorText.textContent = ERROR_MESSAGES[res.status] ?? 'Er ging iets mis. Probeer opnieuw.';
         errorDiv.classList.remove('hidden');
         window.turnstile?.reset();
-      } catch {
-        errorText.textContent = 'Geen verbinding. Controleer internet en probeer opnieuw.';
+      } catch (err) {
+        clearTimeout(timeoutId);
+        if (err.name === 'AbortError') {
+          errorText.textContent = 'De aanvraag duurde te lang. Controleer je internet en probeer opnieuw.';
+        } else {
+          errorText.textContent = 'Geen verbinding. Controleer internet en probeer opnieuw.';
+        }
         errorDiv.classList.remove('hidden');
         window.turnstile?.reset();
       }
