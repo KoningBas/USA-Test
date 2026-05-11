@@ -3,6 +3,9 @@
   "version": "1.0.0",
   "description": "USA Sport fitness gym website",
   "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "serve": "node scripts/serve.mjs",
     "screenshot": "node scripts/screenshot.mjs",
