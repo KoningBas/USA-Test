@@ -72,3 +72,13 @@ test('whitespace-only naam returns naam error', () => {
   const errors = validateFields({ ...VALID, naam: '   ' });
   assert.ok(errors.includes('naam'));
 });
+
+test('adres of 201 characters returns adres error', () => {
+  const errors = validateFields({ ...VALID, adres: 'A'.repeat(201) });
+  assert.ok(errors.includes('adres'));
+});
+
+test('telefoon of 21 characters returns telefoon error', () => {
+  const errors = validateFields({ ...VALID, telefoon: '0'.repeat(21) });
+  assert.ok(errors.includes('telefoon'));
+});
