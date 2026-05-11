@@ -93,6 +93,39 @@
     .fac-wipe.fac-visible{clip-path:inset(0 0% 0 0);}
     .fac-fade-up{opacity:0;transform:translateY(24px);transition:opacity 500ms cubic-bezier(0.25,0.46,0.45,0.94) var(--fac-delay,0ms),transform 500ms cubic-bezier(0.25,0.46,0.45,0.94) var(--fac-delay,0ms);}
     .fac-fade-up.fac-visible{opacity:1;transform:translateY(0);}
+
+    /* Modal animation */
+    #dagpas-modal{pointer-events:none;}
+    #dagpas-modal.is-open{pointer-events:auto;}
+    #dagpas-modal .modal-backdrop{
+      background:rgba(0,0,0,0);
+      backdrop-filter:blur(0px);
+      transition:background 500ms ease,backdrop-filter 500ms ease;
+    }
+    #dagpas-modal.is-open .modal-backdrop{
+      background:rgba(0,0,0,0.85);
+      backdrop-filter:blur(8px);
+    }
+    #dagpas-modal.is-closing .modal-backdrop{
+      transition:background 200ms ease,backdrop-filter 200ms ease;
+      background:rgba(0,0,0,0);
+      backdrop-filter:blur(0px);
+    }
+    #dagpas-modal .modal-card{
+      transform:scale(0.7) translateY(20px);
+      opacity:0;
+      transition:transform 500ms cubic-bezier(0.34,1.56,0.64,1) 150ms,
+                 opacity 350ms ease 150ms;
+    }
+    #dagpas-modal.is-open .modal-card{
+      transform:scale(1) translateY(0);
+      opacity:1;
+    }
+    #dagpas-modal.is-closing .modal-card{
+      transition:opacity 200ms ease,transform 200ms ease;
+      opacity:0;
+      transform:scale(0.95);
+    }
   </style>
 </head>
 <body class="font-poppins antialiased">
