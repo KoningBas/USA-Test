@@ -784,7 +784,7 @@
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('fac-visible'); facWipeObs.unobserve(e.target); }
       });
-    }, { rootMargin: '0px 0px -80px 0px', threshold: 0.1 });
+    }, { threshold: 0 });
     document.querySelectorAll('.fac-wipe').forEach(el => facWipeObs.observe(el));
 
     // Faciliteiten — staggered fade-up op kleine kaarten
@@ -792,8 +792,16 @@
       entries.forEach(e => {
         if (e.isIntersecting) { e.target.classList.add('fac-visible'); facFadeObs.unobserve(e.target); }
       });
-    }, { rootMargin: '0px 0px -60px 0px', threshold: 0.1 });
+    }, { threshold: 0 });
     document.querySelectorAll('.fac-fade-up').forEach(el => facFadeObs.observe(el));
+
+    // Fallback: als fac-elementen al in viewport bij load (bv. direct naar #faciliteiten)
+    requestAnimationFrame(() => {
+      document.querySelectorAll('.fac-wipe:not(.fac-visible), .fac-fade-up:not(.fac-visible)').forEach(el => {
+        const r = el.getBoundingClientRect();
+        if (r.top < window.innerHeight && r.bottom > 0) el.classList.add('fac-visible');
+      });
+    });
   </script>
 </body>
 </html>
