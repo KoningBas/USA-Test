@@ -1,6 +1,10 @@
 import { Resend } from 'resend';
 import { validateFields } from './lib/validate.js';
 
+for (const key of ['RESEND_API_KEY', 'RESEND_FROM_EMAIL', 'NOTIFY_EMAIL', 'TURNSTILE_SECRET_KEY']) {
+  if (!process.env[key]) throw new Error(`Missing required env var: ${key}`);
+}
+
 const resend = new Resend(process.env.RESEND_API_KEY);
 
 async function verifyTurnstile(token, ip) {
@@ -22,11 +26,19 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { naam, adres, email, telefoon, website, turnstileToken } = req.body ?? {};
+  if (!req.body || typeof req.body !== 'object' || Array.isArray(req.body)) {
+    return res.status(400).json({ error: 'Bad request' });
+  }
+
+  const { naam, adres, email, telefoon, website, turnstileToken } = req.body;
 
   // Honeypot — bots fill this hidden field, humans don't
   if (website) {
     return res.status(400).json({ error: 'Bad request' });
+  }
+
+  if (!turnstileToken || typeof turnstileToken !== 'string') {
+    return res.status(400).json({ error: 'Verificatie mislukt' });
   }
 
   // Turnstile verification
@@ -52,14 +64,16 @@ export default async function handler(req, res) {
     timeStyle: 'short',
   });
 
-  try {
-    // Confirmation email → user
-    await resend.emails.send({
+  const sanitize = (s) => s.trim().replace(/[\r\n]+/g, ' ');
+
+  const [confirm, notify] = await Promise.allSettled([
+    resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL,
-      to: email.trim(),
+      to: sanitize(email),
+      replyTo: 'usa.rijssen@planet.nl',
       subject: 'Jouw gratis dagpas aanvraag — USA Sport Rijssen',
       text: [
-        `Hoi ${naam.trim()},`,
+        `Hoi ${sanitize(naam)},`,
         '',
         'Bedankt voor je aanvraag! We hebben je gratis dagpas ontvangen.',
         '',
@@ -75,32 +89,35 @@ export default async function handler(req, res) {
         'Fahrenheitstraat 3, 7461 JA Rijssen',
         'usa-rijssen.nl',
       ].join('\n'),
-    });
-
-    // Notification email → gym
-    await resend.emails.send({
+    }),
+    resend.emails.send({
       from: process.env.RESEND_FROM_EMAIL,
       to: process.env.NOTIFY_EMAIL,
-      replyTo: email.trim(),
-      subject: `Nieuwe dagpas aanvraag — ${naam.trim()}`,
+      replyTo: sanitize(email),
+      subject: `Nieuwe dagpas aanvraag — ${sanitize(naam)}`,
       text: [
         'Nieuwe aanvraag via de website:',
         '',
-        `Naam:       ${naam.trim()}`,
-        `Adres:      ${adres.trim()}`,
-        `E-mail:     ${email.trim()}`,
-        `Telefoon:   ${telefoon.trim()}`,
+        `Naam:       ${sanitize(naam)}`,
+        `Adres:      ${sanitize(adres)}`,
+        `E-mail:     ${sanitize(email)}`,
+        `Telefoon:   ${sanitize(telefoon)}`,
         `Tijdstip:   ${now}`,
         `IP-adres:   ${ip}`,
         '',
         '---',
         'Gebruik Reply om te antwoorden (Reply-To is ingesteld op aanvrager).',
       ].join('\n'),
-    });
+    }),
+  ]);
 
-    return res.status(200).json({ success: true });
-  } catch (err) {
-    console.error('[dagpas] email send failed:', err?.message ?? err);
+  if (confirm.status === 'rejected' || notify.status === 'rejected') {
+    if (confirm.status === 'rejected')
+      console.error('[dagpas] confirmation email failed:', confirm.reason?.message);
+    if (notify.status === 'rejected')
+      console.error('[dagpas] notification email failed:', notify.reason?.message);
     return res.status(500).json({ error: 'Server error' });
   }
+
+  return res.status(200).json({ success: true });
 }
