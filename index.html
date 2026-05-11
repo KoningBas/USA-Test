@@ -796,6 +796,20 @@
 </div>
 
   <script>
+    function openModal() {
+      const m = document.getElementById('dagpas-modal');
+      m.classList.remove('hidden', 'is-closing');
+      requestAnimationFrame(() => requestAnimationFrame(() => m.classList.add('is-open')));
+    }
+    function closeModal() {
+      const m = document.getElementById('dagpas-modal');
+      m.classList.remove('is-open');
+      m.classList.add('is-closing');
+      setTimeout(() => {
+        m.classList.add('hidden');
+        m.classList.remove('is-closing');
+      }, 220);
+    }
     function handleDagpasSubmit(e) {
       e.preventDefault();
       document.getElementById('dagpas-form').classList.add('hidden');
