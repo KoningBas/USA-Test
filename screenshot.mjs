@@ -24,7 +24,7 @@ async function takeScreenshot() {
     });
 
     const page = await browser.newPage();
-    await page.setViewport({ width: 1200, height: 800 });
+    await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 1 });
     await page.goto(url, { waitUntil: 'networkidle0' });
 
     // Find the next screenshot number

@@ -9,20 +9,22 @@
   <meta name="description" content="USA Sport in Rijssen: fitness, 60+ groepslessen/week, personal training, fysiotherapie en zonnestudio. Probeer gratis een dagpas. Bel 0548-517073." />
   <meta name="robots" content="index, follow" />
   <link rel="canonical" href="https://usa-rijssen.nl" />
+  <link rel="icon" href="Usalogo2.png" type="image/png" />
+  <meta name="theme-color" content="#1C1C1E" />
 
   <!-- Open Graph -->
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://usa-rijssen.nl" />
   <meta property="og:title" content="USA Sport — Dé Fitness Arena in Rijssen" />
   <meta property="og:description" content="Fitness, groepslessen, personal training en fysiotherapie in Rijssen. Probeer gratis een dagpas." />
-  <meta property="og:image" content="https://placehold.co/1200x630/1C1C1E/CC1122?text=USA+Sport+Rijssen" />
+  <meta property="og:image" content="https://usa-rijssen.nl/Banner2.png" />
   <meta property="og:locale" content="nl_NL" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="USA Sport — Dé Fitness Arena in Rijssen" />
   <meta name="twitter:description" content="Fitness, groepslessen, personal training en fysiotherapie in Rijssen." />
-  <meta name="twitter:image" content="https://placehold.co/1200x630/1C1C1E/CC1122?text=USA+Sport+Rijssen" />
+  <meta name="twitter:image" content="https://usa-rijssen.nl/Banner2.png" />
 
   <!-- Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -126,9 +128,36 @@
       opacity:0;
       transform:scale(0.95);
     }
+
+    /* Skip link */
+    .skip-link{position:absolute;top:-48px;left:16px;background:#CC1122;color:#fff;padding:10px 18px;z-index:9999;font-family:'Poppins',sans-serif;font-weight:600;font-size:14px;border-radius:0 0 4px 4px;transition:top 200ms ease;}
+    .skip-link:focus{top:0;}
+
+    /* Button scale — replaces inline onmouseover */
+    .btn-scale{transition:transform 220ms cubic-bezier(0.34,1.56,0.64,1),background-color 200ms ease-out,color 200ms ease-out !important;}
+    .btn-scale:hover{transform:scale(1.03);}
+    .btn-scale:active{transform:scale(0.97);}
+
+    /* Cookie banner body offset */
+    body.cookie-visible{padding-bottom:80px;}
+
+    /* prefers-reduced-motion */
+    @media(prefers-reduced-motion:reduce){
+      .reveal{opacity:1!important;transform:none!important;transition:none!important;}
+      .fac-wipe{clip-path:inset(0 0% 0 0)!important;transition:none!important;}
+      .fac-fade-up{opacity:1!important;transform:none!important;transition:none!important;}
+      .animate-bounce-y{animation:none!important;}
+      #dagpas-modal .modal-card,#dagpas-modal .modal-backdrop{transition:none!important;}
+    }
   </style>
+  <noscript><style>
+    .reveal{opacity:1!important;transform:none!important;}
+    .fac-wipe{clip-path:inset(0 0% 0 0)!important;}
+    .fac-fade-up{opacity:1!important;transform:none!important;}
+  </style></noscript>
 </head>
 <body class="font-poppins antialiased">
+  <a href="#main-content" class="skip-link">Sla naar hoofdinhoud</a>
 
   <!-- NAV -->
   <header class="fixed top-0 left-0 right-0 z-50 bg-surface/90 backdrop-blur-md border-b border-sand/10">
@@ -147,7 +176,7 @@
           class="hidden lg:inline-flex items-center gap-2 bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold text-sm px-5 py-2.5 rounded-sm shadow-red transition-colors duration-200 cursor-pointer">
           Word lid
         </button>
-        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Menu openen">
+        <button id="menu-btn" class="lg:hidden flex flex-col gap-1.5 p-2 cursor-pointer" aria-label="Menu openen" aria-expanded="false" aria-controls="mobile-menu">
           <span class="w-6 h-0.5 bg-off-white"></span>
           <span class="w-6 h-0.5 bg-off-white"></span>
           <span class="w-6 h-0.5 bg-off-white"></span>
@@ -168,15 +197,18 @@
   </header>
   <script>
     document.getElementById('menu-btn').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
+      const menuHidden = document.getElementById('mobile-menu').classList.toggle('hidden');
+      const btn = document.getElementById('menu-btn');
+      btn.setAttribute('aria-expanded', String(!menuHidden));
+      btn.setAttribute('aria-label', menuHidden ? 'Menu openen' : 'Menu sluiten');
     });
   </script>
 
-  <main>
+  <main id="main-content">
     <!-- HERO -->
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img src="Dumbel4k.png"
+    <img src="Banner2.png" fetchpriority="high"
       alt="USA Sport fitness arena Rijssen" class="w-full h-full object-cover object-center" style="filter:contrast(1.12) saturate(1.15) brightness(0.95);" />
     <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(28,28,30,.97) 0%,rgba(28,28,30,.90) 30%,rgba(28,28,30,.45) 60%,rgba(28,28,30,.0) 100%),linear-gradient(to top,rgba(28,28,30,.55) 0%,transparent 35%);"></div>
   </div>
@@ -192,9 +224,7 @@
     </p>
     <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-16 reveal">
       <button onclick="openModal()"
-        class="inline-flex items-center justify-center gap-2 bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold px-8 py-4 rounded-sm shadow-red cursor-pointer transition-colors duration-200"
-        style="transition:transform 200ms ease-out,background-color 200ms ease-out;"
-        onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+        class="inline-flex items-center justify-center gap-2 bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold px-8 py-4 rounded-sm shadow-red cursor-pointer btn-scale">
         Probeer gratis dagpas
         <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
       </button>
@@ -258,8 +288,8 @@
 
       <!-- GROTE KAART: Fitness & Kracht -->
       <div class="fac-card-big fac-wipe">
-        <div class="fac-photo" style="background:linear-gradient(135deg,#200a0d 0%,#0d0f18 100%);">
-          <div class="fac-ph"><span aria-hidden="true" class="font-montserrat font-extrabold" style="font-size:8rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">1</span></div>
+        <div class="fac-photo">
+          <img src="Dumbel4k.png" alt="" aria-hidden="true" class="w-full h-full object-cover" style="filter:contrast(1.08) saturate(0.85) brightness(0.78);" loading="eager" />
         </div>
         <div class="fac-overlay"></div>
         <div class="fac-content-big">
@@ -279,8 +309,8 @@
       <div class="fac-cards-row">
 
         <div class="fac-card-small fac-fade-up" style="--fac-delay:0ms;">
-          <div class="fac-photo" style="background:linear-gradient(135deg,#0a1a0f 0%,#0d1612 100%);">
-            <div class="fac-ph"><span aria-hidden="true" class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">2</span></div>
+          <div class="fac-photo">
+            <img src="https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=600&h=400&fit=crop&q=80" alt="" aria-hidden="true" class="w-full h-full object-cover" style="filter:brightness(0.75) saturate(1.05);" loading="lazy" />
           </div>
           <div class="fac-overlay"></div>
           <div class="fac-content-small">
@@ -291,8 +321,8 @@
         </div>
 
         <div class="fac-card-small fac-fade-up" style="--fac-delay:80ms;">
-          <div class="fac-photo" style="background:linear-gradient(135deg,#1a0d0d 0%,#160c0e 100%);">
-            <div class="fac-ph"><span aria-hidden="true" class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">3</span></div>
+          <div class="fac-photo">
+            <img src="https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=600&h=400&fit=crop&q=80" alt="" aria-hidden="true" class="w-full h-full object-cover" style="filter:brightness(0.72) saturate(0.95);" loading="lazy" />
           </div>
           <div class="fac-overlay"></div>
           <div class="fac-content-small">
@@ -303,8 +333,8 @@
         </div>
 
         <div class="fac-card-small fac-fade-up" style="--fac-delay:160ms;">
-          <div class="fac-photo" style="background:linear-gradient(135deg,#0d0d1a 0%,#0c0c18 100%);">
-            <div class="fac-ph"><span aria-hidden="true" class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">4</span></div>
+          <div class="fac-photo">
+            <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&h=400&fit=crop&q=80" alt="" aria-hidden="true" class="w-full h-full object-cover" style="filter:brightness(0.7) saturate(0.9);" loading="lazy" />
           </div>
           <div class="fac-overlay"></div>
           <div class="fac-content-small">
@@ -315,8 +345,8 @@
         </div>
 
         <div class="fac-card-small fac-fade-up" style="--fac-delay:240ms;">
-          <div class="fac-photo" style="background:linear-gradient(135deg,#1a1508 0%,#161108 100%);">
-            <div class="fac-ph"><span aria-hidden="true" class="font-montserrat font-extrabold" style="font-size:5rem;color:rgba(255,255,255,0.04);letter-spacing:-0.05em;">5</span></div>
+          <div class="fac-photo">
+            <img src="https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600&h=400&fit=crop&q=80" alt="" aria-hidden="true" class="w-full h-full object-cover" style="filter:brightness(0.72) saturate(0.8) sepia(0.1);" loading="lazy" />
           </div>
           <div class="fac-overlay"></div>
           <div class="fac-content-small">
@@ -336,9 +366,11 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="relative rounded-sm overflow-hidden shadow-card reveal">
-        <div class="w-full h-80 lg:h-full flex items-center justify-center bg-surface-raised border border-sand/10" style="min-height:320px;">
-          <span class="font-montserrat font-extrabold text-sand/30" style="font-size:6rem;letter-spacing:-0.04em;">1</span>
-        </div>
+        <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800&h=700&fit=crop&q=80"
+          alt="Groepslessen bij USA Sport Rijssen"
+          class="w-full h-80 lg:h-full object-cover"
+          style="min-height:320px;filter:brightness(0.88) saturate(1.05) contrast(1.05);"
+          loading="lazy" />
       </div>
       <div class="reveal">
         <span class="font-poppins text-xs font-semibold tracking-widest uppercase text-usa-red mb-3 block">02 — Groepslessen</span>
@@ -501,9 +533,11 @@
         </a>
       </div>
       <div class="relative rounded-sm overflow-hidden shadow-card order-1 lg:order-2 reveal">
-        <div class="w-full h-80 lg:h-96 flex items-center justify-center bg-surface-raised border border-sand/10">
-          <span class="font-montserrat font-extrabold text-sand/30" style="font-size:6rem;letter-spacing:-0.04em;">2</span>
-        </div>
+        <img src="https://images.unsplash.com/photo-1552674605-db6ffd4facb5?w=800&h=600&fit=crop&q=80"
+          alt="Personal training bij USA Sport Rijssen"
+          class="w-full h-80 lg:h-96 object-cover"
+          style="filter:brightness(0.85) saturate(1.0) contrast(1.05);"
+          loading="lazy" />
       </div>
     </div>
   </div>
@@ -515,12 +549,15 @@
     <div class="text-center mb-16 reveal">
       <span class="font-poppins text-xs font-semibold tracking-widest uppercase text-usa-red mb-3 block">05 — Reviews</span>
       <div class="flex items-center justify-center gap-2 mb-3">
-        <div class="flex gap-0.5">
+        <div class="flex gap-0.5" aria-label="4.6 van 5 sterren">
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#CC1122" stroke="#CC1122" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#CC1122" stroke="#CC1122" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#CC1122" stroke="#CC1122" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
           <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#CC1122" stroke="#CC1122" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
-          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="#CC1122" stroke="#CC1122" stroke-width="1.5"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" stroke="#CC1122" stroke-width="1.5">
+            <defs><linearGradient id="star46" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="60%" stop-color="#CC1122"/><stop offset="60%" stop-color="#2E2E32"/></linearGradient></defs>
+            <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="url(#star46)"/>
+          </svg>
         </div>
         <span class="font-montserrat font-extrabold text-off-white text-3xl" style="letter-spacing:-0.02em;">4.6</span>
       </div>
@@ -575,18 +612,23 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="grid grid-cols-2 gap-4 order-2 lg:order-1 reveal">
-        <div class="rounded-sm overflow-hidden shadow-card row-span-2 flex items-center justify-center bg-surface-raised border border-sand/10" style="min-height:400px;">
-          <span class="font-montserrat font-extrabold text-sand/30" style="font-size:6rem;letter-spacing:-0.04em;">3</span>
+        <div class="rounded-sm overflow-hidden shadow-card row-span-2" style="min-height:400px;">
+          <img src="6gym.png" alt="USA Sport krachtzaal overzicht"
+            class="w-full h-full object-cover"
+            style="min-height:400px;object-position:0% 20%;filter:brightness(0.82) saturate(1.0) contrast(1.05);"
+            loading="lazy" />
         </div>
-        <div class="rounded-sm overflow-hidden shadow-card flex items-center justify-center bg-surface-raised border border-sand/10">
-          <div class="w-full h-48 flex items-center justify-center">
-            <span class="font-montserrat font-extrabold text-sand/30" style="font-size:4rem;letter-spacing:-0.04em;">4</span>
-          </div>
+        <div class="rounded-sm overflow-hidden shadow-card">
+          <img src="Dumbel4k.png" alt="USA Sport dumbbell rek"
+            class="w-full h-48 object-cover"
+            style="object-position:center 40%;filter:brightness(0.80) saturate(0.9) contrast(1.08);"
+            loading="lazy" />
         </div>
-        <div class="rounded-sm overflow-hidden shadow-card flex items-center justify-center bg-surface-raised border border-sand/10">
-          <div class="w-full h-48 flex items-center justify-center">
-            <span class="font-montserrat font-extrabold text-sand/30" style="font-size:4rem;letter-spacing:-0.04em;">5</span>
-          </div>
+        <div class="rounded-sm overflow-hidden shadow-card">
+          <img src="6gym.png" alt="USA Sport apparatuurzaal"
+            class="w-full h-48 object-cover"
+            style="object-position:100% 100%;filter:brightness(0.80) saturate(1.0) contrast(1.05);"
+            loading="lazy" />
         </div>
       </div>
       <div class="order-1 lg:order-2 reveal">
@@ -645,7 +687,7 @@
       <div class="rounded-sm overflow-hidden shadow-card reveal" style="min-height:320px;">
         <iframe
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2436.123456789!2d6.5166!3d52.3066!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47b81a3c3c3c3c3c%3A0x0!2sFahrenheitstraat%203%2C%207461%20JA%20Rijssen!5e0!3m2!1snl!2snl!4v1234567890"
-          width="100%" height="100%" style="border:0;min-height:320px;filter:grayscale(0.3) contrast(1.1);"
+          width="100%" height="100%" style="border:0;min-height:320px;filter:invert(90%) hue-rotate(180deg) brightness(0.85) contrast(0.9);"
           allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"
           title="Locatie USA Sport Rijssen">
         </iframe>
@@ -661,9 +703,7 @@
     <h2 class="font-montserrat font-bold text-white mb-4" style="font-size:clamp(2rem,4vw,3rem);letter-spacing:-0.02em;">Klaar om te starten?</h2>
     <p class="font-poppins text-white/80 mb-10 max-w-md mx-auto" style="line-height:1.75;">Probeer USA Sport gratis met een dagpas. Geen verplichtingen, geen gedoe.</p>
     <button onclick="openModal()"
-      class="inline-flex items-center gap-2 bg-white hover:bg-off-white text-anthracite font-poppins font-semibold px-8 py-4 rounded-sm cursor-pointer transition-colors duration-200"
-      style="transition:transform 200ms ease-out,background-color 200ms ease-out;"
-      onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">
+      class="inline-flex items-center gap-2 bg-white hover:bg-off-white text-anthracite font-poppins font-semibold px-8 py-4 rounded-sm cursor-pointer btn-scale">
       Start gratis dagpas
       <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
     </button>
@@ -729,7 +769,7 @@
 <!-- DAGPAS MODAL -->
 <div id="dagpas-modal" class="hidden fixed inset-0 z-[200] flex items-center justify-center p-4">
   <div class="modal-backdrop absolute inset-0" onclick="closeModal()"></div>
-  <div class="modal-card relative bg-surface rounded-sm shadow-card w-full max-w-lg p-8 z-10">
+  <div class="modal-card relative bg-surface rounded-2xl shadow-card w-full max-w-lg p-8 z-10">
     <button onclick="closeModal()"
       class="absolute top-4 right-4 text-muted hover:text-off-white transition-colors duration-200 cursor-pointer"
       aria-label="Sluit">
@@ -783,11 +823,11 @@
       <a href="#" class="underline underline-offset-2 hover:text-off-white transition-colors duration-200">cookiebeleid</a>.
     </p>
     <div class="flex gap-3 flex-shrink-0">
-      <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookies','accepted')"
+      <button onclick="document.getElementById('cookie-banner').style.display='none';document.body.classList.remove('cookie-visible');localStorage.setItem('cookies','accepted')"
         class="bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold text-sm px-5 py-2 rounded-sm transition-colors duration-200 cursor-pointer">
         Akkoord
       </button>
-      <button onclick="document.getElementById('cookie-banner').style.display='none';localStorage.setItem('cookies','declined')"
+      <button onclick="document.getElementById('cookie-banner').style.display='none';document.body.classList.remove('cookie-visible');localStorage.setItem('cookies','declined')"
         class="border border-sand/30 hover:border-sand/60 text-muted hover:text-off-white font-poppins text-sm px-4 py-2 rounded-sm transition-[border-color,color] duration-200 cursor-pointer">
         Weigeren
       </button>
@@ -820,6 +860,8 @@
     });
     if (localStorage.getItem('cookies')) {
       document.getElementById('cookie-banner').style.display = 'none';
+    } else {
+      document.body.classList.add('cookie-visible');
     }
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
