@@ -62,6 +62,35 @@
     .reveal.visible { opacity: 1; transform: translateY(0); }
     @keyframes bounce-y { 0%,100%{transform:translateY(0)} 50%{transform:translateY(6px)} }
     .animate-bounce-y { animation: bounce-y 2s infinite; }
+    /* FACILITEITEN BENTO */
+    .fac-bento{display:flex;flex-direction:column;gap:12px;}
+    .fac-cards-row{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;}
+    @media(min-width:1024px){.fac-cards-row{grid-template-columns:repeat(4,1fr);}}
+    .fac-card-big{position:relative;height:340px;border-radius:4px;overflow:hidden;cursor:pointer;}
+    @media(max-width:767px){.fac-card-big{height:260px;}}
+    .fac-card-big .fac-photo{position:absolute;inset:0;transition:transform 500ms cubic-bezier(0.25,0.46,0.45,0.94);}
+    .fac-card-big:hover .fac-photo{transform:scale(1.04);}
+    .fac-card-small{position:relative;height:220px;border-radius:4px;overflow:hidden;cursor:pointer;transition:transform 300ms cubic-bezier(0.34,1.56,0.64,1),box-shadow 300ms ease;}
+    @media(max-width:767px){.fac-card-small{height:180px;}}
+    .fac-card-small:hover{transform:translateY(-6px);box-shadow:0 20px 40px rgba(204,17,34,0.25),0 8px 16px rgba(0,0,0,0.4);}
+    .fac-card-small .fac-photo{position:absolute;inset:0;transition:transform 400ms cubic-bezier(0.25,0.46,0.45,0.94);}
+    .fac-card-small:hover .fac-photo{transform:scale(1.06);}
+    .fac-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,0.88) 0%,rgba(0,0,0,0.2) 60%,transparent 100%);}
+    .fac-ph{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;}
+    .fac-content-big{position:absolute;bottom:0;left:0;right:0;padding:28px 32px;display:flex;align-items:flex-end;justify-content:space-between;gap:16px;z-index:1;}
+    @media(max-width:767px){.fac-content-big{flex-direction:column;align-items:flex-start;padding:20px;gap:12px;}}
+    .fac-content-small{position:absolute;bottom:0;left:0;right:0;padding:14px 16px;z-index:1;}
+    .fac-cta-big{flex-shrink:0;display:inline-flex;align-items:center;gap:8px;background:#CC1122;color:#fff;font-size:12px;font-weight:600;letter-spacing:0.04em;text-transform:uppercase;padding:10px 20px;border-radius:4px;text-decoration:none;white-space:nowrap;transition:background 200ms,transform 150ms;}
+    .fac-cta-big:hover{background:#e01428;transform:translateY(-1px);}
+    .fac-cta-big svg{transition:transform 200ms;}
+    .fac-cta-big:hover svg{transform:translateX(3px);}
+    .fac-cta-small{display:inline-flex;align-items:center;gap:5px;color:#CC1122;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;text-decoration:none;}
+    .fac-cta-small svg{transition:transform 200ms;}
+    .fac-card-small:hover .fac-cta-small svg{transform:translateX(3px);}
+    .fac-wipe{clip-path:inset(0 100% 0 0);transition:clip-path 600ms cubic-bezier(0.25,0.46,0.45,0.94);}
+    .fac-wipe.fac-visible{clip-path:inset(0 0% 0 0);}
+    .fac-fade-up{opacity:0;transform:translateY(24px);transition:opacity 500ms cubic-bezier(0.25,0.46,0.45,0.94) var(--fac-delay,0ms),transform 500ms cubic-bezier(0.25,0.46,0.45,0.94) var(--fac-delay,0ms);}
+    .fac-fade-up.fac-visible{opacity:1;transform:translateY(0);}
   </style>
 </head>
 <body class="font-poppins antialiased">
@@ -112,14 +141,14 @@
     <!-- HERO -->
 <section class="relative min-h-screen flex items-center justify-center overflow-hidden">
   <div class="absolute inset-0 z-0">
-    <img src="https://placehold.co/1920x1080/1C1C1E/252528?text=Gym+Interior"
-      alt="USA Sport fitness arena Rijssen" class="w-full h-full object-cover" />
-    <div class="absolute inset-0" style="background:linear-gradient(to bottom,rgba(28,28,30,.2) 0%,rgba(28,28,30,.65) 50%,rgba(28,28,30,.93) 100%);"></div>
+    <img src="Dumbel4k.png"
+      alt="USA Sport fitness arena Rijssen" class="w-full h-full object-cover object-center" style="filter:contrast(1.12) saturate(1.15) brightness(0.95);" />
+    <div class="absolute inset-0" style="background:linear-gradient(to right,rgba(28,28,30,.97) 0%,rgba(28,28,30,.90) 30%,rgba(28,28,30,.45) 60%,rgba(28,28,30,.0) 100%),linear-gradient(to top,rgba(28,28,30,.55) 0%,transparent 35%);"></div>
   </div>
-  <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-20 text-center lg:text-left">
+  <div class="relative z-10 w-full max-w-7xl mx-auto px-6 lg:px-8 pt-28 pb-20 text-center lg:text-left">
     <span class="inline-block font-poppins text-xs font-semibold tracking-widest uppercase text-usa-red mb-6">Dé Fitness Arena van Rijssen</span>
     <h1 class="font-montserrat font-extrabold text-off-white leading-none mb-6 reveal"
-      style="font-size:clamp(2.5rem,7vw,5rem);letter-spacing:-0.03em;">
+      style="font-size:clamp(3rem,8vw,6.5rem);letter-spacing:-0.03em;">
       TRAIN.<br />FEEL BETTER.<br />LIVE BETTER.
     </h1>
     <p class="font-poppins font-light text-off-white/70 mb-10 max-w-xl mx-auto lg:mx-0 reveal"
@@ -229,8 +258,9 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="relative rounded-sm overflow-hidden shadow-card reveal">
-        <img src="https://placehold.co/800x600/252528/F5F4F0?text=Groepslessen" alt="Groepslessen USA Sport" class="w-full h-80 lg:h-full object-cover" />
-        <div class="absolute inset-0" style="background:linear-gradient(135deg,rgba(204,17,34,0.12) 0%,transparent 60%);"></div>
+        <div class="w-full h-80 lg:h-full flex items-center justify-center bg-surface-raised border border-sand/10" style="min-height:320px;">
+          <span class="font-montserrat font-extrabold text-sand/30" style="font-size:6rem;letter-spacing:-0.04em;">1</span>
+        </div>
       </div>
       <div class="reveal">
         <span class="font-poppins text-xs font-semibold tracking-widest uppercase text-usa-red mb-3 block">02 — Groepslessen</span>
@@ -316,28 +346,32 @@
       </div>
 
       <!-- Fitness vanaf 24 jaar (MEEST GEKOZEN) -->
-      <div class="bg-surface rounded-sm shadow-card flex flex-col relative reveal" style="border-top:4px solid #CC1122;">
-        <div class="bg-usa-red text-white font-poppins font-semibold text-xs tracking-widest uppercase px-4 py-2 text-center">★ Meest gekozen</div>
-        <div class="p-6 flex flex-col flex-grow">
-          <h3 class="font-montserrat font-bold text-off-white text-base mb-1">Fitness vanaf 24 jaar</h3>
-          <p class="font-poppins text-muted text-xs mb-5">Het complete pakket voor volwassenen</p>
-          <div class="mb-1">
-            <span class="font-montserrat font-extrabold text-off-white" style="font-size:2.25rem;letter-spacing:-0.02em;">€54<span style="font-size:1.25rem;">,95</span></span>
-            <span class="font-poppins text-muted text-xs"> / 4 weken</span>
+      <div class="relative reveal">
+        <!-- Red ambient glow behind card -->
+        <div style="position:absolute;inset:-40px;background:radial-gradient(ellipse at 50% 50%, rgba(204,17,34,0.55) 0%, rgba(204,17,34,0.2) 45%, transparent 70%);pointer-events:none;z-index:0;border-radius:50%;filter:blur(8px);"></div>
+        <div class="bg-surface rounded-sm flex flex-col relative z-10" style="border-top:4px solid #CC1122;box-shadow:0 -12px 120px rgba(204,17,34,0.4),0 12px 120px rgba(204,17,34,0.25),0 0 0 1px rgba(204,17,34,0.25),0 2px 8px rgba(0,0,0,0.5),0 8px 32px rgba(0,0,0,0.3);">
+          <div class="bg-usa-red text-white font-poppins font-semibold text-xs tracking-widest uppercase px-4 py-2 text-center">★ Meest gekozen</div>
+          <div class="p-6 flex flex-col flex-grow">
+            <h3 class="font-montserrat font-bold text-off-white text-base mb-1">Fitness vanaf 24 jaar</h3>
+            <p class="font-poppins text-muted text-xs mb-5">Het complete pakket voor volwassenen</p>
+            <div class="mb-1">
+              <span class="font-montserrat font-extrabold text-off-white" style="font-size:2.25rem;letter-spacing:-0.02em;">€54<span style="font-size:1.25rem;">,95</span></span>
+              <span class="font-poppins text-muted text-xs"> / 4 weken</span>
+            </div>
+            <p class="font-poppins text-xs mb-1" style="color:#CC1122;font-size:0.7rem;">* Met korting: €46,71 / 4 weken</p>
+            <p class="font-poppins text-muted text-xs mb-5" style="font-size:0.7rem;">Inschrijfkosten: jaarabonnement <strong class="text-off-white/60">€5,-</strong> · flexibel <strong class="text-off-white/60">€35,-</strong></p>
+            <ul class="flex flex-col gap-2 mb-6 flex-grow">
+              <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Onbeperkt sporten</li>
+              <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Persoonlijk trainingsschema</li>
+              <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Groepslessen + SportBioscoop</li>
+              <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Meten + wegen + voedingsadvies</li>
+              <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Luxe kleedruimtes, douches & sauna</li>
+              <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Kinderopvang (tot 4 jaar) & koffie/thee</li>
+            </ul>
+            <button onclick="document.getElementById('dagpas-modal').classList.remove('hidden')" class="inline-flex items-center justify-center bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold text-sm px-4 py-2.5 rounded-sm shadow-red transition-colors duration-200 cursor-pointer w-full">
+              Nu inschrijven
+            </button>
           </div>
-          <p class="font-poppins text-xs mb-1" style="color:#CC1122;font-size:0.7rem;">* Met korting: €46,71 / 4 weken</p>
-          <p class="font-poppins text-muted text-xs mb-5" style="font-size:0.7rem;">Inschrijfkosten: jaarabonnement <strong class="text-off-white/60">€5,-</strong> · flexibel <strong class="text-off-white/60">€35,-</strong></p>
-          <ul class="flex flex-col gap-2 mb-6 flex-grow">
-            <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Onbeperkt sporten</li>
-            <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Persoonlijk trainingsschema</li>
-            <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Groepslessen + SportBioscoop</li>
-            <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Meten + wegen + voedingsadvies</li>
-            <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Luxe kleedruimtes, douches & sauna</li>
-            <li class="flex items-start gap-2 font-poppins text-off-white/75 text-xs leading-snug"><svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#CC1122" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="flex-shrink-0 mt-0.5"><polyline points="20 6 9 17 4 12"/></svg>Kinderopvang (tot 4 jaar) & koffie/thee</li>
-          </ul>
-          <button onclick="document.getElementById('dagpas-modal').classList.remove('hidden')" class="inline-flex items-center justify-center bg-usa-red hover:bg-usa-red-dark text-white font-poppins font-semibold text-sm px-4 py-2.5 rounded-sm shadow-red transition-colors duration-200 cursor-pointer w-full">
-            Nu inschrijven
-          </button>
         </div>
       </div>
 
@@ -389,8 +423,9 @@
         </a>
       </div>
       <div class="relative rounded-sm overflow-hidden shadow-card order-1 lg:order-2 reveal">
-        <img src="https://placehold.co/800x600/1C1C1E/F5F4F0?text=Personal+Trainer" alt="Personal trainer USA Sport" class="w-full h-80 lg:h-96 object-cover" />
-        <div class="absolute inset-0" style="background:linear-gradient(to top,rgba(28,28,30,.6) 0%,transparent 50%);"></div>
+        <div class="w-full h-80 lg:h-96 flex items-center justify-center bg-surface-raised border border-sand/10">
+          <span class="font-montserrat font-extrabold text-sand/30" style="font-size:6rem;letter-spacing:-0.04em;">2</span>
+        </div>
       </div>
     </div>
   </div>
@@ -462,14 +497,18 @@
   <div class="max-w-7xl mx-auto px-6 lg:px-8">
     <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
       <div class="grid grid-cols-2 gap-4 order-2 lg:order-1 reveal">
-        <div class="rounded-sm overflow-hidden shadow-card row-span-2">
-          <img src="https://placehold.co/400x600/1C1C1E/F5F4F0?text=Gym+1" alt="USA Sport interieur" class="w-full h-full object-cover" />
+        <div class="rounded-sm overflow-hidden shadow-card row-span-2 flex items-center justify-center bg-surface-raised border border-sand/10" style="min-height:400px;">
+          <span class="font-montserrat font-extrabold text-sand/30" style="font-size:6rem;letter-spacing:-0.04em;">3</span>
         </div>
-        <div class="rounded-sm overflow-hidden shadow-card">
-          <img src="https://placehold.co/400x280/252528/F5F4F0?text=Gym+2" alt="USA Sport faciliteit" class="w-full h-48 object-cover" />
+        <div class="rounded-sm overflow-hidden shadow-card flex items-center justify-center bg-surface-raised border border-sand/10">
+          <div class="w-full h-48 flex items-center justify-center">
+            <span class="font-montserrat font-extrabold text-sand/30" style="font-size:4rem;letter-spacing:-0.04em;">4</span>
+          </div>
         </div>
-        <div class="rounded-sm overflow-hidden shadow-card">
-          <img src="https://placehold.co/400x280/2E2E32/F5F4F0?text=Gym+3" alt="USA Sport groepszaal" class="w-full h-48 object-cover" />
+        <div class="rounded-sm overflow-hidden shadow-card flex items-center justify-center bg-surface-raised border border-sand/10">
+          <div class="w-full h-48 flex items-center justify-center">
+            <span class="font-montserrat font-extrabold text-sand/30" style="font-size:4rem;letter-spacing:-0.04em;">5</span>
+          </div>
         </div>
       </div>
       <div class="order-1 lg:order-2 reveal">
