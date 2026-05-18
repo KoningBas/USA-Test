@@ -1,7 +1,8 @@
 {
+  "name": "sample",
   "functions": {
     "api/dagpas.js": {
-"maxDuration": 10
+      "maxDuration": 10
     }
   }
 }
